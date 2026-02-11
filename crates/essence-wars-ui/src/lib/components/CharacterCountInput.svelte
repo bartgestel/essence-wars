@@ -6,7 +6,7 @@
     const isOver75Percent = $derived(progress > 0.75);
     const isOver90Percent = $derived(progress > 0.9);
 
-    const textColorClass = $derived(
+    const textColorClass: string = $derived(
         isOver90Percent
             ? "text-red-500"
             : isOver75Percent
@@ -16,5 +16,5 @@
 </script>
 
 <div>
-    <span class="{textColorClass}" style>{currentLength} / {maxLength}</span>
+    <span class={textColorClass}> style>{currentLength} / {maxLength}</span>
 </div>

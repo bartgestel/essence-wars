@@ -16,5 +16,5 @@
 </script>
 
 <div>
-    <span class={textColorClass}> style>{currentLength} / {maxLength}</span>
+    <span class={textColorClass}>{currentLength} / {maxLength}</span>
 </div>

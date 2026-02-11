@@ -1,6 +1,7 @@
 <script lang="ts">
   import { deckBuilderStore } from "$lib/stores/deckBuilderState.svelte";
   import { playSound } from "$lib/audio";
+  import CharacterCountInput from "$lib/components/CharacterCountInput.svelte";
 
   let { onClose, onSaved }: { onClose: () => void; onSaved: () => void } = $props();
 
@@ -11,6 +12,11 @@
 
   const isNewDeck = $derived(!deckBuilderStore.currentDeckId);
   const canSave = $derived(deckName.trim().length > 0 && !isSaving);
+
+  const maxLengths = {
+    name: 50,
+    description: 200
+  };
 
   async function handleSave() {
     if (!canSave) return;
@@ -82,8 +88,9 @@
           type="text"
           bind:value={deckName}
           placeholder="Enter deck name..."
-          maxlength="50"
+          maxlength={maxLengths.name}
         />
+        <CharacterCountInput currentLength={deckName.length} maxLength={maxLengths.name} />
       </div>
 
       <div class="form-group">
@@ -93,8 +100,9 @@
           bind:value={deckDescription}
           placeholder="Describe your deck strategy..."
           rows="3"
-          maxlength="200"
+          maxlength={maxLengths.description}
         ></textarea>
+        <CharacterCountInput currentLength={deckDescription.length} maxLength={maxLengths.description} />
       </div>
 
       <div class="deck-summary">
